@@ -24,7 +24,7 @@ function validateUrl(value) {
   try {
     parsedUrl = new URL(trimmedUrl);
   } catch {
-    return "올바른 URL 형식으로 입력해 주세요."
+    return "올바른 URL 형식으로 입력해 주세요.";
   }
 
   return null;
@@ -56,12 +56,39 @@ export default function Home() {
 
     setIsLoading(true);
 
-    await new Promise((resolve) => {
-      setTimeout(resolve, 800);
-    });
+    //2주차
+    // await new Promise((resolve) => {
+    //   setTimeout(resolve, 800);
+    // });
 
-    setResult("입력값 검증이 완료되었습니다. 아직 Backend API와 연결되진 않았습니다.");
-    setIsLoading(false);
+    // setResult("입력값 검증이 완료되었습니다. 아직 Backend API와 연결되진 않았습니다.");
+    // setIsLoading(false);
+
+    //3주차
+    try {
+      const response = await fetch("/api/shorten", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          originalUrl,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error?.message || "요청 처리에 실패했습니다.");
+        return;
+      }
+
+      setResult(data.shortUrl);
+    } catch {
+      setError("서버에 연결할 수 없습니다.");
+    } finally {
+      setIsLoading(false);
+    }
   }
   //화면에 표시되는 내용
   return (
