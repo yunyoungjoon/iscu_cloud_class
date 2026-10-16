@@ -54,8 +54,6 @@ export default function Home() {
       return;
     }
 
-    setIsLoading(true);
-
     //2주차
     // await new Promise((resolve) => {
     //   setTimeout(resolve, 800);
@@ -65,6 +63,7 @@ export default function Home() {
     // setIsLoading(false);
 
     //3주차
+    setIsLoading(true);
     try {
       const response = await fetch("/api/shorten", {
         method: "POST",
@@ -148,8 +147,7 @@ export default function Home() {
         <aside className="practice-note">
           <span aria-hidden="true">✓</span>
           <p>
-            이번 주에는 <code>validateUrl</code> 함수를 완성해 입력값 검증을
-            구현합니다.
+            이번 주에는 <code>Route Handler</code>를 만들고 Backend API와 연결합니다.
           </p>
         </aside>
       </section>
