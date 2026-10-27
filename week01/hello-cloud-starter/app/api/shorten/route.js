@@ -164,6 +164,8 @@ export async function POST(request) {
      * shortCode와 shortUrl을 생성합니다.
      */
     const shortCode = createShortCode(originalUrl);
+    await saveUrl(shortCode, originalUrl);
+    
     const baseUrl = new URL(request.url).origin;
 
 

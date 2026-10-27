@@ -55,6 +55,7 @@ export default function Home() {
     }
 
     //2주차
+    //setIsLoading(true);
     // await new Promise((resolve) => {
     //   setTimeout(resolve, 800);
     // });
@@ -87,6 +88,12 @@ export default function Home() {
       setError("서버에 연결할 수 없습니다.");
     } finally {
       setIsLoading(false);
+    }
+
+    if (!originalUrl) {
+      console.warn("Short URL not found", { shortCode });
+
+      return new Response("Not Found", { status: 404 });
     }
   }
   //화면에 표시되는 내용

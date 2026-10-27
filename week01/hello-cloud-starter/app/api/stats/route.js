@@ -33,6 +33,10 @@ export async function GET(request) {
     const topUrl = await getTopUrl();
     const urls = await getUrlStats();
 
+    const user = authenticate(request);
+    if (!user) return authenticationRequiredResponse();
+    if (!authorize(user, "stats:read")) return forbiddenResponse();
+
     // summary, topUrl, urls를 하나의 JSON 응답으로 반환하세요.
     // README의 목표 JSON 구조를 참고하세요.
     return Response.json(

@@ -13,4 +13,5 @@ export function authorize(user, permission) {
   const permissions = ROLE_PERMISSIONS[user.role] ?? [];
 
   // TODO 2. README의 인가 조건 코드를 아래 한 줄에 옮겨 적으세요.
-   return permissions.includes(permission);}
+   return permissions.includes(permission);
+}
